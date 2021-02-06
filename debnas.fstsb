@@ -1,0 +1,29 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/mapper/vg1-lroot /               ext4    noatime,errors=remount-ro 0       1
+# /dev/mapper/vg1-lboot /boot           ext4    noatime         0       2
+/dev/mapper/vg1-lhome /home           ext4    noatime         0       2
+/dev/mapper/vg1-swap none            swap    sw              0       0
+
+#PERMANENT STORAGE ARRAY MOUNTS
+UUID="190fc3ad-25eb-453f-8600-2f6d24fbbe51" 	/media/pool/disk4	ext4	noatime,defaults	0	0
+UUID="e291bcd9-6808-4dfd-936e-e5b582f4e89f"	/media/pool/disk3	ext4	noatime,defaults	0	0
+UUID="cb996287-e40f-4198-b2a2-ea997ad806f4"	/media/pool/disk2	ext4	noatime,defaults	0	0
+UUID="5c9f0cd2-b34b-413c-9898-7fc8e3855c4c"	/media/pool/disk1	ext4	noatime,defaults	0	0
+UUID="6ae7cb37-aa8b-4f89-86a3-1f1ecdc0c021"	/media/pool/diskparity	ext4	noatime,defaults	0	0
+ 
+#/dev/sdd1: LABEL="dsksdd" UUID="190fc3ad-25eb-453f-8600-2f6d24fbbe51" TYPE="ext4" PARTUUID="546b7650-ed58-4e51-823b-07d11f03fc4b"
+#/dev/sdc1: LABEL="dsksdc" UUID="e291bcd9-6808-4dfd-936e-e5b582f4e89f" TYPE="ext4" PARTUUID="348ae0fb-563b-4616-b03d-320c0cb30b0c"
+#/dev/sdb1: LABEL="dsksdb" UUID="cb996287-e40f-4198-b2a2-ea997ad806f4" TYPE="ext4" PARTUUID="72c4c584-8279-4b8c-aa79-739a5c7dfce7"
+#/dev/sda1: LABEL="dsksda" UUID="5c9f0cd2-b34b-413c-9898-7fc8e3855c4c" TYPE="ext4" PARTUUID="9efd53b9-c0aa-41ee-b8fc-0b99d94af8af"
+#/dev/sde: PTUUID="8c3d40d0-0253-424b-9ffc-4655c4124106" PTTYPE="gpt"
+#/dev/sde1: LABEL="dskpar" UUID="6ae7cb37-aa8b-4f89-86a3-1f1ecdc0c021" TYPE="ext4" PARTUUID="1ab06b50-c19e-0b4d-af7f-c9f061be2db9"
+
+# MERGERFS Folder Mounts
+#/dev/disk/by-label/dsksda /dev/disk/by-label/dsksdb /dev/disk/by-label/dsksdc /dev/disk/by-label/dsksdd
+/media/pool/disk1/merg-sda/bigstor-shr/:/media/pool/disk2/merg-sdb/bigstor-shr/:/media/pool/disk3/merg-sdc/bigstor-shr/:/media/pool/disk4/merg-sdd/bigstor-shr/: /media/storage	fuse.mergerfs category.create=eprand,nonempty,defaults,allow_other,use_ino,minfreespace=20G,fsname=mergestorage 0 0
