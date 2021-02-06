@@ -1,11 +1,15 @@
-git remote add -m master origin ssh://git@github.com:jpppdk/debnas.git.
 git remote remove origin
+ooo
+git remote add 
 
 ---SSH---
 eval "$(ssh-agent -s)"
 ssh-add ~/git_rep_keys/jpppdk_rsa
 ssh -T git@github.com
 Hi jpppdk! You've successfully authenticated, but GitHub does not provide shell access.
+
+git remote add -m master origin git@github.com:jpppdk/debnas.git
+git fetch origin
 ---SSH---
 
 
